@@ -1,0 +1,1 @@
+export { authMiddleware as middleware } from '@/lib/auth/middleware';
