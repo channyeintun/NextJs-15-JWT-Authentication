@@ -1,11 +1,10 @@
 'use server';
 
 import { BACKEND_URL } from "@/lib/backendUrl";
+import { AUTH_COOKIE_NAME } from "@/lib/cookie/cookieName";
 import { JWT } from "@/lib/jwt/jwt";
 import axios from "axios";
 import { cookies } from "next/headers";
-
-const AUTH_COOKIE_NAME = 'authCookie';
 
 export async function httpClient(customHeaders?: Record<string, string>) {
     const cookieStore = await cookies();

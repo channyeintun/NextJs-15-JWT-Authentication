@@ -7,8 +7,7 @@ import { verifyJwt } from './verifyJwt';
 import { protectedRoutes } from './protectedRoutes';
 import { getExpiredTime } from '../utils';
 import { refresh } from '../../services/authentication/refresh';
-
-const AUTH_COOKIE_NAME = 'authCookie'
+import { AUTH_COOKIE_NAME } from '../cookie/cookieName';
 
 export async function authMiddleware(request: NextRequest) {
     let res = NextResponse.next();

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Cookies from 'js-cookie'
-import { JWT } from '@/lib/jwt/jwt'
-import { useRouter } from 'next/navigation'
 
-const AUTH_COOKIE_NAME = 'authCookie'
+import { useRouter } from 'next/navigation'
+import { getToken } from '@/lib/cookie/getToken'
+import { AUTH_COOKIE_NAME } from '@/lib/cookie/cookieName'
 
 type SessionState = {
   token: string | null;
@@ -28,14 +28,4 @@ export function useSession(): SessionState & { logout: Logout } {
   }
 
   return { ...sessionState, logout }
-}
-
-function getToken() {
-  const authCookie = Cookies.get(AUTH_COOKIE_NAME);
-  let token = null;
-  if (authCookie) {
-    const jwt: JWT = JSON.parse(authCookie);
-    token = jwt.accessToken;
-  }
-  return token;
 }

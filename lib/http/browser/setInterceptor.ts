@@ -4,8 +4,7 @@ import { JWT } from "@/lib/jwt/jwt";
 import { setToken } from "./setToken";
 import { SIGN_IN_URL } from "@/services/urls";
 import { refresh } from "@/services/authentication/refresh";
-
-const AUTH_COOKIE_NAME = 'authCookie'
+import { AUTH_COOKIE_NAME } from "@/lib/cookie/cookieName";
 
 let refreshing_token: Promise<JWT> | undefined;
 export function setInterceptor(httpClient: AxiosInstance) {
