@@ -6,12 +6,17 @@ import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { getToken } from '@/lib/cookie/getToken'
 import { AUTH_COOKIE_NAME } from '@/lib/cookie/cookieName'
+import { httpClient } from '@/lib/http/browser/client'
 
 type SessionState = {
   token: string | null;
 }
 
-type Logout = ({ redirect, path }: { redirect: boolean; path: string; }) => void
+type LogoutParams = {
+  redirect?: boolean; path?: string;
+}
+
+type Logout = (params?: LogoutParams) => void
 
 export function useSession(): SessionState & { logout: Logout } {
 
@@ -21,10 +26,11 @@ export function useSession(): SessionState & { logout: Logout } {
     token: getToken(),
   })
 
-  const logout = ({ redirect = true, path = '/' }) => {
+  const logout = (params: LogoutParams = { redirect: true, path: '/' }) => {
     Cookies.remove(AUTH_COOKIE_NAME);
     setSessionState({ token: null });
-    redirect && router.push(path);
+    httpClient.removeToken();
+    params.redirect && router.push(params.path!);
   }
 
   return { ...sessionState, logout }
