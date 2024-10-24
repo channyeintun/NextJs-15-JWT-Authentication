@@ -26,8 +26,7 @@ export function setInterceptor(httpClient: AxiosInstance) {
 
                 try {
                     if (jwt && jwt.refreshToken) {
-                        refreshing_token =
-                            refreshing_token ?? refresh({ refreshToken: jwt.refreshToken });
+                        refreshing_token = refreshing_token ?? refresh({ refreshToken: jwt.refreshToken });
                         const newJwt = await refreshing_token;
                         if (newJwt && newJwt.accessToken) {
                             Cookies.set(AUTH_COOKIE_NAME, JSON.stringify(newJwt));
@@ -36,9 +35,10 @@ export function setInterceptor(httpClient: AxiosInstance) {
                             axios.defaults.headers.common.Authorization = bearToken;
                             originalRequest.headers["Authorization"] = bearToken;
                         } else {
-                            throw new Error(
+                            const err= new Error(
                                 "Unknown problem occurred with current session. Try to log in again.",
                             );
+                            return Promise.reject(err);
                         }
                     }
 
