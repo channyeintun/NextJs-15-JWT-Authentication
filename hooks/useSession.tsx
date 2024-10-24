@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { JWT } from '@/lib/auth/jwt'
+import { JWT } from '@/lib/jwt/jwt'
 import { useRouter } from 'next/navigation'
 
 const AUTH_COOKIE_NAME = 'authCookie'

@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers'
 
-import { JWT } from './jwt';
+import { JWT } from '../jwt/jwt';
 import { getExpiredTime } from '../utils';
 
 const AUTH_COOKIE_NAME = 'authCookie'

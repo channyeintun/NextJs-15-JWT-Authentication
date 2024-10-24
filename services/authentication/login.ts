@@ -1,5 +1,6 @@
-import { JWT } from "./jwt";
-import { SIGN_IN_URL } from "./urls"
+
+import { JWT } from "@/lib/jwt/jwt";
+import { SIGN_IN_URL } from "../urls";
 
 export const login = async <T>(params: T): Promise<JWT> => {
     const headers = new Headers();

@@ -1,5 +1,6 @@
-import { JWT } from "./jwt";
-import { REFRESH_URL } from "./urls"
+
+import { JWT } from "@/lib/jwt/jwt";
+import { REFRESH_URL } from "@/services/urls";
 
 export type RefreshParams = {
     refreshToken: string;

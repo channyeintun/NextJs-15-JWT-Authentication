@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { JWT } from "./jwt";
+import { JWT } from "../jwt/jwt";
 
 dayjs.extend(utc);
 
-export const verifyJwt = (jwt:JWT)=>{
+export const verifyJwt = async (jwt:JWT)=>{
     const expirationDate = dayjs.utc(jwt.expiration);
 
     const now = dayjs.utc();

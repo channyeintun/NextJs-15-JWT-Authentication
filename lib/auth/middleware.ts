@@ -2,10 +2,11 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-import { JWT } from './jwt';
+import { JWT } from '../jwt/jwt';
 import { verifyJwt } from './verifyJwt';
 import { protectedRoutes } from './protectedRoutes';
 import { getExpiredTime } from '../utils';
+import { refresh } from '../../services/authentication/refresh';
 
 const AUTH_COOKIE_NAME = 'authCookie'
 
@@ -18,7 +19,7 @@ export async function authMiddleware(request: NextRequest) {
 
     if (authCookie && authCookie.value) {
         const jwt: JWT = JSON.parse(authCookie.value);
-        const verifiedJwt = verifyJwt(jwt);
+        const verifiedJwt = await verifyJwt(jwt).then(curryRefresh(jwt));
 
         if (verifiedJwt) {
             const duration = getExpiredTime(jwt.expiration);
@@ -51,3 +52,10 @@ export async function authMiddleware(request: NextRequest) {
 export const config = {
     matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
+
+const curryRefresh = (jwt: JWT) => async (result: JWT | undefined) => {
+    if (!result) {
+        return await refresh({ refreshToken: jwt.refreshToken });
+    }
+    return result
+}
