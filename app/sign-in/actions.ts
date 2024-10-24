@@ -21,7 +21,7 @@ export async function signInAction(formData: FormData) {
     }
 
     const jwt = await login<z.infer<typeof loginSchema>>(validatedFields.data).catch(err => {
-        console.log(err)
+        console.error(err)
         return null;
     });
     if (jwt && jwt.accessToken) {
