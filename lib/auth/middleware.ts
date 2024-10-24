@@ -6,8 +6,8 @@ import { JWT } from '../jwt/jwt';
 import { verifyJwt } from './verifyJwt';
 import { protectedRoutes } from './protectedRoutes';
 import { getExpiredTime } from '../utils';
-import { refresh } from '../../services/authentication/refresh';
 import { AUTH_COOKIE_NAME } from '../cookie/cookieName';
+import { curryRefresh } from './curryRefresh';
 
 export async function authMiddleware(request: NextRequest) {
     let res = NextResponse.next();
@@ -51,10 +51,3 @@ export async function authMiddleware(request: NextRequest) {
 export const config = {
     matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
-
-const curryRefresh = (jwt: JWT) => async (result: JWT | undefined) => {
-    if (!result) {
-        return await refresh({ refreshToken: jwt.refreshToken });
-    }
-    return result
-}

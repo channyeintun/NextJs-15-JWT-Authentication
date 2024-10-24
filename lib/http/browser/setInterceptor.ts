@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import Cookies from 'js-cookie';
 import { JWT } from "@/lib/jwt/jwt";
 import { setToken } from "./setToken";
-import { SIGN_IN_URL } from "@/services/urls";
+import { SIGN_IN_URL } from "@/services/authentication/urls";
 import { refresh } from "@/services/authentication/refresh";
 import { AUTH_COOKIE_NAME } from "@/lib/cookie/cookieName";
 
