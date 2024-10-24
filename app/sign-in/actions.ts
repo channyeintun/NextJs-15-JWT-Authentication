@@ -1,9 +1,9 @@
 'use server'
 
 import { z } from 'zod'
-import { login } from '@/lib/auth/login';
 import { redirect } from 'next/navigation';
 import { setSession } from '@/lib/auth/session';
+import { login } from '@/services/authentication/login';
 
 const loginSchema = z.object({
     mobileNumber: z.string().min(1),

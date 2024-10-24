@@ -19,8 +19,13 @@ export async function httpClient(customHeaders?: Record<string, string>) {
         ...customHeaders,
     };
 
-    return axios({
+    const client = axios.create({
         baseURL: BACKEND_URL,
         headers
     });
+    
+    client.defaults.headers["Cache-Control"] = "no-cache";
+    client.defaults.headers["Pragma"] = "no-cache";
+    client.defaults.headers["Expires"] = "0";
+    return client;
 }
