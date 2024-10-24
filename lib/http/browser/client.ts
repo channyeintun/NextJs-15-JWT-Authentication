@@ -6,8 +6,7 @@ import { BACKEND_URL } from "@/lib/backendUrl";
 import { setToken } from "./setToken";
 import { setInterceptor } from "./setInterceptor";
 import { JWT } from "@/lib/jwt/jwt";
-
-const AUTH_COOKIE_NAME = 'authCookie'
+import { AUTH_COOKIE_NAME } from "@/lib/cookie/cookieName";
 
 const httpClient = axios.create({
     baseURL: BACKEND_URL,

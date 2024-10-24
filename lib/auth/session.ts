@@ -2,8 +2,7 @@ import { cookies } from 'next/headers'
 
 import { JWT } from '../jwt/jwt';
 import { getExpiredTime } from '../utils';
-
-const AUTH_COOKIE_NAME = 'authCookie'
+import { AUTH_COOKIE_NAME } from '../cookie/cookieName';
 
 export const getSession = async () => {
     const cookieStore = await cookies();
