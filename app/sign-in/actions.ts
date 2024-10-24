@@ -20,7 +20,10 @@ export async function signInAction(formData: FormData) {
         return;
     }
 
-    const jwt = await login<z.infer<typeof loginSchema>>(validatedFields.data).catch(err => (console.error(err), null));
+    const jwt = await login<z.infer<typeof loginSchema>>(validatedFields.data).catch(err => {
+        console.log(err)
+        return null;
+    });
     if (jwt && jwt.accessToken) {
         await setSession(jwt);
         redirect('/')
